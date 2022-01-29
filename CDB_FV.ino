@@ -6,6 +6,8 @@ int i2cData3 = 3;
 int i2cData2 = 2;
 int flag = 0;
 
+//*NEW*/ 
+int capval;
 
 
 
@@ -67,7 +69,7 @@ void receiveData(int byteCount) {
 
       flag = 1;
     }
-    else if(i2cData == 0){
+    else if(i2cData == 2){
 
       flag = 2;
     }
@@ -79,7 +81,7 @@ void sendData() {
     Wire.write(func1_val);
 
   }else if(flag==2){
-    Wire.write(dht_val);
+    Wire.write(func1_val2);
   }
 
 }
@@ -359,10 +361,10 @@ void PIR_MODE_16(){
 
 //*****&&&&&&&&&&&&*********++++MODE 17 CAPTEUR DE SON LED ON OFF++++*******&&&&&&&&&&&*********
 void CAP_Son_MODE_17(){
-    int capval = analogRead(A7);
-    digitalWrite(LED1, 1);
+    capval = analogRead(A7);
+    digitalWrite(13, 1);
     delay(capval);
-    digitalWrite(LED1, 0);
+    digitalWrite(13, 0);
     delay(capval);
   }
 //ùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùù
@@ -484,7 +486,7 @@ void loop() {
   if (flag == 1){
     led_blink_fast();
   }else if(flag==2){
-    DHTSENSOR();
+    led_blink_slow();
   }else if(flag==3){
     ledblink_MODE1();
   }else if(flag==4){
